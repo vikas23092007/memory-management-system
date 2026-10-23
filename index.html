@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OS-MemSim | Operating System Memory Management Suite</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="brand">
+        <div class="brand-icon">⚡</div>
+        <div>
+          <span>OS-MemSim</span>
+          <span class="brand-tag">v2.0 PRO</span>
+        </div>
+      </div>
+
+      <nav class="nav-tabs">
+        <button class="nav-btn active" data-tab="overview">🧭 Overview</button>
+        <button class="nav-btn" data-tab="contiguous">📦 Contiguous</button>
+        <button class="nav-btn" data-tab="page-replacement">🔄 Page Replacement</button>
+        <button class="nav-btn" data-tab="paging">🗺️ Paging & TLB</button>
+        <button class="nav-btn" data-tab="segmentation">📐 Segmentation</button>
+        <button class="nav-btn" data-tab="thrashing">⚡ Thrashing</button>
+        <button class="nav-btn" data-tab="quiz">🎓 Viva & Quiz</button>
+        <button class="nav-btn" data-tab="report">📄 Lab Report</button>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Dark/Light Mode">
+          ☀️ Light
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Container -->
+  <main class="main-content">
+
+    <!-- ========================================================
+         TAB 1: OVERVIEW & MEMORY HIERARCHY
+         ======================================================== -->
+    <section id="tab-overview" class="tab-pane active">
+      
+      <!-- Hero Banner -->
+      <div class="hero-card">
+        <h1 class="hero-title">Operating System Memory Management System</h1>
+        <p class="hero-subtitle">
+          An interactive, academic-grade simulation suite covering contiguous & non-contiguous memory allocation, 
+          virtual memory page replacement, address translation via hardware MMU & TLB, boundary-checked segmentation, 
+          and thrashing prevention.
+        </p>
+        <div class="hero-badges">
+          <span class="badge badge-cyan">Operating Systems CS301</span>
+          <span class="badge badge-green">First / Best / Worst / Next Fit</span>
+          <span class="badge badge-purple">FIFO • LRU • Optimal • LFU • Clock</span>
+          <span class="badge badge-amber">Belady's Anomaly Proven</span>
+          <span class="badge badge-cyan">EMAT & TLB Simulation</span>
+        </div>
+      </div>
+
+      <!-- Quick Exploration Cards Grid -->
+      <h2 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 1.2rem; color: var(--text-main);">
+        Core Architecture Modules
+      </h2>
+
+      <div class="topics-grid">
+        <!-- Topic 1 -->
+        <div class="topic-card" data-target-tab="contiguous">
+          <div class="topic-icon-wrap topic-icon-blue">📦</div>
+          <h3 class="topic-title">Contiguous Allocation</h3>
+          <p class="topic-desc">
+            Explore dynamic and fixed partitioning. Simulate First Fit, Best Fit, Worst Fit, and Next Fit algorithms. Track internal and external fragmentation and trigger real-time memory compaction.
+          </p>
+          <ul class="topic-features-list">
+            <li>Dynamic & Fixed Partitioning</li>
+            <li>First, Best, Worst & Next Fit</li>
+            <li>Real-time Memory Compaction</li>
+            <li>Internal & External Fragmentation Meter</li>
+          </ul>
+          <button class="topic-btn">Open Simulator ➔</button>
+        </div>
+
+        <!-- Topic 2 -->
+        <div class="topic-card" data-target-tab="page-replacement">
+          <div class="topic-icon-wrap topic-icon-emerald">🔄</div>
+          <h3 class="topic-title">Page Replacement</h3>
+          <p class="topic-desc">
+            Step-by-step playback of FIFO, LRU, Optimal (Belady's OPT), LFU, and Clock (Second-Chance). Compare hit/fault ratios side-by-side and prove Belady's Anomaly.
+          </p>
+          <ul class="topic-features-list">
+            <li>5 Major Algorithms with Step-by-Step Playback</li>
+            <li>Side-by-Side Comparison Matrix & Charts</li>
+            <li>Interactive Belady's Anomaly Proof</li>
+            <li>Standard Silberschatz & Tanenbaum Presets</li>
+          </ul>
+          <button class="topic-btn">Open Simulator ➔</button>
+        </div>
+
+        <!-- Topic 3 -->
+        <div class="topic-card" data-target-tab="paging">
+          <div class="topic-icon-wrap topic-icon-purple">🗺️</div>
+          <h3 class="topic-title">Paging, MMU & TLB</h3>
+          <p class="topic-desc">
+            Translate logical addresses (decimal, hex, binary) to physical addresses. Watch page table lookups, handle Page Fault exceptions, and calculate Effective Memory Access Time (EMAT).
+          </p>
+          <ul class="topic-features-list">
+            <li>Bitwise Address Splitting [p | d] ➔ [f | d]</li>
+            <li>Hardware TLB Cache (Hit / Miss)</li>
+            <li>EMAT Latency Calculator with Sliders</li>
+            <li>Multi-Level Paging Overhead Analysis</li>
+          </ul>
+          <button class="topic-btn">Open Simulator ➔</button>
+        </div>
+
+        <!-- Topic 4 -->
+        <div class="topic-card" data-target-tab="segmentation">
+          <div class="topic-icon-wrap topic-icon-amber">📐</div>
+          <h3 class="topic-title">Segmentation & Bounds</h3>
+          <p class="topic-desc">
+            User-view memory architecture with Segment Tables (Base, Limit). Simulate boundary checks and watch hardware MMU trigger SIGSEGV (Segmentation Fault) traps.
+          </p>
+          <ul class="topic-features-list">
+            <li>Logical Address Pair &lt;Segment, Offset&gt;</li>
+            <li>MMU Hardware Boundary Check (Offset &lt; Limit)</li>
+            <li>Interactive SIGSEGV Trap Demonstration</li>
+            <li>Physical Memory Segment Allocation Map</li>
+          </ul>
+          <button class="topic-btn">Open Simulator ➔</button>
+        </div>
+
+        <!-- Topic 5 -->
+        <div class="topic-card" data-target-tab="thrashing">
+          <div class="topic-icon-wrap topic-icon-rose">⚡</div>
+          <h3 class="topic-title">Thrashing & Working Set</h3>
+          <p class="topic-desc">
+            Understand when the system spends more time swapping than executing. Interactive CPU utilization vs Degree of Multiprogramming curve, and Working Set model simulation.
+          </p>
+          <ul class="topic-features-list">
+            <li>Interactive Thrashing Cliff Curve</li>
+            <li>Working Set Model with Sliding Window Δ</li>
+            <li>Page Fault Frequency (PFF) Thresholds</li>
+            <li>OS Memory Pressure Mitigation</li>
+          </ul>
+          <button class="topic-btn">Open Simulator ➔</button>
+        </div>
+
+        <!-- Topic 6 -->
+        <div class="topic-card" data-target-tab="quiz">
+          <div class="topic-icon-wrap topic-icon-cyan">🎓</div>
+          <h3 class="topic-title">Viva Voce & Quiz Hub</h3>
+          <p class="topic-desc">
+            Ace your OS lab exam! 25+ essential university viva questions with model answers, interactive 10-question graded quiz with explanations, and flippable flashcards.
+          </p>
+          <ul class="topic-features-list">
+            <li>Interactive OS Quiz with Instant Feedback</li>
+            <li>25+ Searchable Viva Voce Questions</li>
+            <li>Flippable Concept Flashcards</li>
+            <li>Academic Formula Cheat Sheets</li>
+          </ul>
+          <button class="topic-btn">Start Practicing ➔</button>
+        </div>
+      </div>
+
+      <!-- Memory Hierarchy Visual Representation -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">💾 Computer Memory Hierarchy</h3>
+            <div class="card-subtitle">Trade-offs between access speed, storage capacity, and monetary cost</div>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:0.6rem; max-width:850px; margin:1rem auto;">
+          <div style="background:linear-gradient(90deg, #ef4444, #dc2626); padding:0.85rem; border-radius:var(--radius-md); text-align:center; color:#fff; font-weight:700; width:45%; margin:0 auto; box-shadow:0 0 12px rgba(239,68,68,0.3)">
+            Registers (~0.5 - 1 ns | < 1 KB)
+          </div>
+          <div style="background:linear-gradient(90deg, #f97316, #ea580c); padding:0.85rem; border-radius:var(--radius-md); text-align:center; color:#fff; font-weight:700; width:60%; margin:0 auto;">
+            Cache L1, L2, L3 (~1 - 10 ns | 32 KB - 64 MB)
+          </div>
+          <div style="background:linear-gradient(90deg, #3b82f6, #2563eb); padding:0.85rem; border-radius:var(--radius-md); text-align:center; color:#fff; font-weight:700; width:75%; margin:0 auto; box-shadow:0 0 15px rgba(59,130,246,0.3)">
+            Main Memory / RAM (~50 - 100 ns | 8 GB - 128 GB) ⬅ [Subject of this Simulator]
+          </div>
+          <div style="background:linear-gradient(90deg, #10b981, #059669); padding:0.85rem; border-radius:var(--radius-md); text-align:center; color:#fff; font-weight:700; width:90%; margin:0 auto;">
+            Solid State Storage / NVMe SSD (~10 - 100 µs | 512 GB - 4 TB) [Swap Space / Backing Store]
+          </div>
+          <div style="background:linear-gradient(90deg, #64748b, #475569); padding:0.85rem; border-radius:var(--radius-md); text-align:center; color:#fff; font-weight:700; width:100%; margin:0 auto;">
+            Secondary Hard Disk & Cloud Storage (~5 - 15 ms | Multi-Terabytes)
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; font-size:0.82rem; color:var(--text-muted); margin-top:1.2rem; padding:0 1rem;">
+          <span>⬆ Higher Speed & Cost per Bit</span>
+          <span>⬇ Greater Storage Capacity</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================
+         TAB 2: CONTIGUOUS MEMORY ALLOCATION
+         ======================================================== -->
+    <section id="tab-contiguous" class="tab-pane">
+      <div class="panel-grid">
+        
+        <!-- Controls Sidebar -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">⚙️ Allocation Settings</h3>
+          </div>
+
+          <!-- Presets -->
+          <div class="form-group">
+            <label class="form-label">Quick Presets</label>
+            <div class="preset-pills">
+              <button class="preset-pill contig-preset-btn" data-preset="textbook">📚 Classic Textbook</button>
+              <button class="preset-pill contig-preset-btn" data-preset="fragmented">🧩 Fragmented RAM</button>
+              <button class="preset-pill contig-preset-btn" data-preset="fixed-demo">📐 Fixed Partitions</button>
+            </div>
+          </div>
+
+          <!-- Partition Mode -->
+          <div class="form-group">
+            <label class="form-label" for="contig-part-mode">Partitioning Scheme</label>
+            <select id="contig-part-mode" class="form-select">
+              <option value="dynamic">Variable (Dynamic) Partitioning</option>
+              <option value="fixed">Fixed Partitioning</option>
+            </select>
+          </div>
+
+          <!-- Total Memory Input -->
+          <div class="form-group">
+            <label class="form-label" for="contig-total-mem">Total Memory Size (KB)</label>
+            <input type="number" id="contig-total-mem" class="form-input" value="1000" min="100" step="50">
+          </div>
+
+          <!-- Fixed Partition Setup (hidden by default) -->
+          <div id="contig-fixed-config" class="form-group" style="display:none;">
+            <label class="form-label" for="contig-fixed-partitions">Partition Sizes (comma separated)</label>
+            <input type="text" id="contig-fixed-partitions" class="form-input" value="150, 250, 200, 300, 100">
+            <span class="form-help">Enter sizes in KB for each fixed partition slot.</span>
+          </div>
+
+          <!-- Allocation Algorithm -->
+          <div class="form-group">
+            <label class="form-label" for="contig-algo">Allocation Algorithm</label>
+            <select id="contig-algo" class="form-select">
+              <option value="first-fit">First Fit (Fastest search)</option>
+              <option value="best-fit">Best Fit (Smallest suitable hole)</option>
+              <option value="worst-fit">Worst Fit (Largest available hole)</option>
+              <option value="next-fit">Next Fit (Continues from last allocation)</option>
+            </select>
+          </div>
+
+          <hr style="border:0; border-top:1px solid var(--border-color); margin:1.2rem 0;">
+
+          <!-- Process Allocation -->
+          <div class="form-group">
+            <label class="form-label" for="contig-proc-size">Request Process Allocation</label>
+            <div style="display:flex; gap:0.5rem;">
+              <input type="number" id="contig-proc-size" class="form-input" placeholder="Size (KB)" value="180" min="10">
+              <button id="contig-allocate-btn" class="btn btn-primary" style="white-space:nowrap;">
+                ➕ Allocate
+              </button>
+            </div>
+          </div>
+
+          <!-- Process Deallocation -->
+          <div class="form-group">
+            <label class="form-label" for="contig-dealloc-pid">Release / Deallocate Process</label>
+            <div style="display:flex; gap:0.5rem;">
+              <select id="contig-dealloc-pid" class="form-select">
+                <option value="">-- No Processes --</option>
+              </select>
+              <button id="contig-deallocate-btn" class="btn btn-danger" style="white-space:nowrap;">
+                🗑️ Free
+              </button>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-top:1.2rem;">
+            <button id="contig-compact-btn" class="btn btn-amber" title="Compacts all allocated processes to remove external fragmentation">
+              ✨ Compact RAM
+            </button>
+            <button id="contig-reset-btn" class="btn btn-secondary">
+              🔄 Reset Memory
+            </button>
+          </div>
+        </div>
+
+        <!-- Visualizer Area -->
+        <div style="display:flex; flex-direction:column; gap:1.2rem;">
+          
+          <!-- Stats Grid -->
+          <div class="stat-grid">
+            <div class="stat-box">
+              <span class="stat-label">Allocated</span>
+              <span id="contig-stat-allocated" class="stat-value cyan">0 KB</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Free Space</span>
+              <span id="contig-stat-free" class="stat-value emerald">1000 KB</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">RAM Utilization</span>
+              <span id="contig-stat-util" class="stat-value purple">0%</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Internal Frag</span>
+              <span id="contig-stat-int-frag" class="stat-value amber">0 KB</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">External Frag</span>
+              <span id="contig-stat-ext-frag" class="stat-value rose">0 KB</span>
+            </div>
+          </div>
+
+          <!-- Memory Bar Visualizer -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">🖥️ Physical RAM Layout Visualizer</h3>
+              <span class="form-help">Blocks show contiguous space in physical RAM</span>
+            </div>
+
+            <div class="memory-bar-wrapper">
+              <div id="contig-mem-bar" class="memory-bar">
+                <!-- Injected via JS -->
+              </div>
+              <div id="contig-addr-bar" class="memory-addresses-bar">
+                <span>0 KB</span>
+                <span>1000 KB</span>
+              </div>
+            </div>
+
+            <div class="legend-strip">
+              <div class="legend-item">
+                <span class="legend-swatch" style="background:var(--accent-blue);"></span>
+                <span>Allocated Process</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-swatch" style="background:#1e293b; border:1px solid #334155;"></span>
+                <span>Free Hole</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-swatch" style="background:#dc2626;"></span>
+                <span>Internal Fragmentation (Wasted Space)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step Activity Log -->
+          <div id="contig-log-box" class="step-log-box">
+            <!-- Latest operation message -->
+          </div>
+
+          <!-- Process Allocation Table -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">📋 Allocated Processes Table</h3>
+            </div>
+            <div class="table-responsive">
+              <table class="pr-table" style="text-align:left;">
+                <thead>
+                  <tr>
+                    <th>Process ID</th>
+                    <th>Size (KB)</th>
+                    <th>Base Address</th>
+                    <th>Limit / End</th>
+                    <th>Internal Frag</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="contig-proc-table-body">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         TAB 3: PAGE REPLACEMENT SIMULATOR
+         ======================================================== -->
+    <section id="tab-page-replacement" class="tab-pane">
+      <div class="panel-grid">
+        
+        <!-- Controls Sidebar -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">⚙️ Page Replacement Controls</h3>
+          </div>
+
+          <!-- Presets -->
+          <div class="form-group">
+            <label class="form-label">Presets</label>
+            <div class="preset-pills">
+              <button class="preset-pill pr-preset-pill" data-preset="silberschatz">📖 Silberschatz Standard</button>
+              <button class="preset-pill pr-preset-pill" data-preset="belady">⚠️ Belady's Anomaly</button>
+              <button class="preset-pill pr-preset-pill" data-preset="locality">🔁 High Locality</button>
+              <button class="preset-pill pr-preset-pill" data-preset="tanenbaum">📘 Tanenbaum Sequence</button>
+            </div>
+          </div>
+
+          <!-- Algorithm Selector -->
+          <div class="form-group">
+            <label class="form-label" for="pr-algo">Algorithm</label>
+            <select id="pr-algo" class="form-select">
+              <option value="fifo">FIFO (First-In, First-Out)</option>
+              <option value="lru">LRU (Least Recently Used)</option>
+              <option value="optimal">Optimal (Belady's OPT / Min Faults)</option>
+              <option value="lfu">LFU (Least Frequently Used)</option>
+              <option value="clock">Clock / Second Chance</option>
+            </select>
+          </div>
+
+          <!-- Frame Count -->
+          <div class="form-group">
+            <label class="form-label" for="pr-frames">Number of Page Frames (Physical RAM slots)</label>
+            <input type="number" id="pr-frames" class="form-input" value="3" min="1" max="8">
+          </div>
+
+          <!-- Reference String -->
+          <div class="form-group">
+            <div class="form-label-row">
+              <label class="form-label" for="pr-ref-string">Reference String (Page Requests)</label>
+              <button id="pr-gen-random" class="btn btn-outline btn-sm" style="font-size:0.7rem; padding:2px 6px;">Random</button>
+            </div>
+            <textarea id="pr-ref-string" class="form-input" rows="3" style="resize:vertical;">7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0, 1, 7, 0, 1</textarea>
+            <span class="form-help">Enter comma or space-separated page numbers.</span>
+          </div>
+
+          <!-- Comparative Benchmarks -->
+          <div style="display:flex; flex-direction:column; gap:0.6rem; margin-top:1.5rem;">
+            <button id="pr-compare-btn" class="btn btn-primary">
+              📊 Compare All 5 Algorithms Side-by-Side
+            </button>
+            <button id="pr-belady-demo-btn" class="btn btn-amber">
+              ⚡ Demonstrate Belady's Anomaly
+            </button>
+          </div>
+        </div>
+
+        <!-- Execution & Visualization Main Area -->
+        <div style="display:flex; flex-direction:column; gap:1.2rem;">
+          
+          <!-- Stat Counters -->
+          <div class="stat-grid">
+            <div class="stat-box">
+              <span class="stat-label">Page Hits</span>
+              <span id="pr-stat-hits" class="stat-value emerald">0</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Page Faults (Misses)</span>
+              <span id="pr-stat-faults" class="stat-value rose">0</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Hit Ratio</span>
+              <span id="pr-stat-hit-ratio" class="stat-value cyan">0%</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Fault Ratio</span>
+              <span id="pr-stat-fault-ratio" class="stat-value amber">0%</span>
+            </div>
+          </div>
+
+          <!-- Playback Control Bar -->
+          <div class="playback-bar">
+            <div class="playback-controls">
+              <button id="pr-step-back-btn" class="btn btn-secondary btn-sm">⏮ Prev</button>
+              <button id="pr-play-btn" class="btn btn-primary btn-sm">▶ Play</button>
+              <button id="pr-step-fwd-btn" class="btn btn-secondary btn-sm">Next ⏭</button>
+              <button id="pr-reset-btn" class="btn btn-outline btn-sm">🔄 Reset</button>
+            </div>
+
+            <div id="pr-step-counter" class="playback-step-info">
+              Step 0 / 20
+            </div>
+
+            <div class="playback-speed">
+              <span>Speed:</span>
+              <button class="btn btn-outline btn-sm speed-btn" data-speed="1400">0.5x</button>
+              <button class="btn btn-outline btn-sm speed-btn active" data-speed="800">1x</button>
+              <button class="btn btn-outline btn-sm speed-btn" data-speed="350">2x</button>
+            </div>
+          </div>
+
+          <!-- Step Commentary Log -->
+          <div id="pr-step-log" class="step-log-box">
+            <!-- Step log injected here -->
+          </div>
+
+          <!-- Belady Result Callout (Hidden by default) -->
+          <div id="pr-belady-result-box" class="card" style="display:none; border-color:var(--accent-amber); background:rgba(245, 158, 11, 0.05);">
+            <!-- Injected by JS -->
+          </div>
+
+          <!-- Execution Matrix Table -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">🖥️ Frame Allocation Matrix</h3>
+              <div class="flex-gap">
+                <span class="badge badge-green" style="font-size:0.7rem">HIT</span>
+                <span class="badge" style="background:rgba(244,63,94,0.15); color:#fb7185; font-size:0.7rem">FAULT (MISS)</span>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table id="pr-matrix-table" class="pr-table">
+                <!-- Rendered by JS -->
+              </table>
+            </div>
+          </div>
+
+          <!-- All Algorithms Comparison Card -->
+          <div id="pr-compare-card" class="card">
+            <div class="card-header">
+              <h3 class="card-title">📊 Multi-Algorithm Benchmark Comparison</h3>
+              <span class="form-help">Evaluates current reference string on all 5 algorithms</span>
+            </div>
+
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem; align-items:center;">
+              <div class="table-responsive">
+                <table class="pr-table" style="text-align:left;">
+                  <thead>
+                    <tr>
+                      <th>Algorithm</th>
+                      <th>Faults</th>
+                      <th>Hits</th>
+                      <th>Hit Ratio</th>
+                      <th>Fault Ratio</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pr-compare-tbody">
+                    <!-- Injected by JS -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Canvas Chart -->
+              <div style="text-align:center;">
+                <canvas id="pr-compare-canvas" width="480" height="230" style="width:100%; max-width:480px; border-radius:var(--radius-md); border:1px solid var(--border-color);"></canvas>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         TAB 4: PAGING, MMU & TLB
+         ======================================================== -->
+    <section id="tab-paging" class="tab-pane">
+      
+      <!-- Architecture Overview Card -->
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div class="card-header">
+          <h3 class="card-title">📐 Hardware Memory Architecture Configuration</h3>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-bottom:1rem;">
+          <div class="form-group">
+            <label class="form-label" for="paging-log-space">Logical Address Space</label>
+            <select id="paging-log-space" class="form-select">
+              <option value="16">16 KB (14-bit address)</option>
+              <option value="64" selected>64 KB (16-bit address)</option>
+              <option value="256">256 KB (18-bit address)</option>
+              <option value="1024">1 MB (20-bit address)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="paging-page-size">Page & Frame Size</label>
+            <select id="paging-page-size" class="form-select">
+              <option value="1">1 KB (10-bit offset)</option>
+              <option value="2">2 KB (11-bit offset)</option>
+              <option value="4" selected>4 KB (12-bit offset)</option>
+              <option value="8">8 KB (13-bit offset)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="paging-phys-mem">Physical Memory Size (RAM)</label>
+            <select id="paging-phys-mem" class="form-select">
+              <option value="64">64 KB (16-bit physical)</option>
+              <option value="128" selected>128 KB (17-bit physical)</option>
+              <option value="512">512 KB (19-bit physical)</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="paging-arch-summary">
+          <!-- Summary chips injected by JS -->
+        </div>
+      </div>
+
+      <!-- Address Translation Interactive Box -->
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div class="card-header">
+          <h3 class="card-title">⚡ Hardware Address Translation (MMU Simulator)</h3>
+        </div>
+
+        <div style="display:flex; gap:0.75rem; max-width:650px; margin-bottom:1.2rem; flex-wrap:wrap;">
+          <input type="text" id="paging-logical-input" class="form-input" style="flex:1; min-width:200px;" placeholder="Enter Logical Address (e.g. 5350 or 0x14E6)" value="5350">
+          <button id="paging-translate-btn" class="btn btn-primary">
+            🔍 Translate Address
+          </button>
+          <button id="paging-random-addr-btn" class="btn btn-outline">
+            🎲 Random Address
+          </button>
+        </div>
+
+        <!-- Translation Result Box -->
+        <div id="paging-result-container" style="display:none; margin-top:1rem;">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+
+      <!-- Tables Side-by-Side: Page Table & TLB Cache -->
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem; margin-bottom:1.5rem;">
+        
+        <!-- Page Table -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">📑 Page Table (Main Memory RAM)</h3>
+              <div class="card-subtitle">Maps Logical Page Number (p) to Physical Frame (f)</div>
+            </div>
+          </div>
+          <div class="table-responsive" style="max-height:280px; overflow-y:auto;">
+            <table class="pr-table" style="text-align:left;">
+              <thead>
+                <tr>
+                  <th>Page (p)</th>
+                  <th>Frame (f)</th>
+                  <th>Valid Bit</th>
+                  <th>Permissions</th>
+                  <th>Toggle</th>
+                </tr>
+              </thead>
+              <tbody id="paging-table-tbody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TLB Cache -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">🚀 Translation Lookaside Buffer (TLB)</h3>
+              <div class="card-subtitle">High-speed hardware associative cache</div>
+            </div>
+            <button id="tlb-flush-btn" class="btn btn-outline btn-sm">Flush TLB</button>
+          </div>
+          <div class="table-responsive">
+            <table class="pr-table" style="text-align:left;">
+              <thead>
+                <tr>
+                  <th>Slot</th>
+                  <th>Tag (Page)</th>
+                  <th>Data (Frame)</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tlb-table-tbody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- EMAT Interactive Formula Calculator -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">⏱️ Effective Memory Access Time (EMAT) Calculator</h3>
+            <div class="card-subtitle">Quantify the performance gain of hardware TLB caching</div>
+          </div>
+          <div class="stat-value cyan" id="emat-result-val">120.00 ns</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1.5rem; margin-bottom:1.5rem;">
+          <div>
+            <div class="form-label-row">
+              <label class="form-label">TLB Hit Ratio (α)</label>
+              <strong id="emat-hit-ratio-val" style="color:var(--accent-cyan)">90%</strong>
+            </div>
+            <input type="range" id="emat-hit-ratio" min="50" max="100" value="90" style="width:100%;">
+          </div>
+
+          <div>
+            <div class="form-label-row">
+              <label class="form-label">TLB Lookup Time (t<sub>TLB</sub>)</label>
+              <strong id="emat-tlb-time-val" style="color:var(--accent-emerald)">20 ns</strong>
+            </div>
+            <input type="range" id="emat-tlb-time" min="5" max="50" value="20" style="width:100%;">
+          </div>
+
+          <div>
+            <div class="form-label-row">
+              <label class="form-label">RAM Access Time (t<sub>RAM</sub>)</label>
+              <strong id="emat-ram-time-val" style="color:var(--accent-amber)">100 ns</strong>
+            </div>
+            <input type="range" id="emat-ram-time" min="40" max="250" value="100" style="width:100%;">
+          </div>
+
+          <div>
+            <div class="form-label-row">
+              <label class="form-label">Paging Scheme</label>
+              <strong id="emat-levels-val" style="color:var(--accent-purple)">1-Level</strong>
+            </div>
+            <select id="emat-levels" class="form-select">
+              <option value="1">1-Level Paging</option>
+              <option value="2">2-Level Paging (Hierarchical)</option>
+              <option value="3">3-Level Paging</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="emat-derivation-text" style="font-family:var(--font-mono); font-size:0.85rem; background:#0b111e; padding:1rem; border-radius:var(--radius-sm); color:#e2e8f0; line-height:1.6;">
+          <!-- Derivation injected by JS -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================
+         TAB 5: SEGMENTATION & BOUNDS
+         ======================================================== -->
+    <section id="tab-segmentation" class="tab-pane">
+      <div class="panel-grid">
+        
+        <!-- Address Check Sidebar -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">🔍 Segment Address Translator</h3>
+          </div>
+
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.2rem;">
+            A logical address in segmentation is defined as a 2D tuple: <strong>&lt;Segment Number (s), Offset (d)&gt;</strong>.
+          </p>
+
+          <div class="form-group">
+            <label class="form-label" for="seg-num-input">Select Segment</label>
+            <select id="seg-num-input" class="form-select">
+              <!-- Populated by JS -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="seg-offset-input">Requested Byte Offset (d)</label>
+            <input type="number" id="seg-offset-input" class="form-input" value="450" min="0">
+          </div>
+
+          <button id="seg-translate-btn" class="btn btn-primary" style="width:100%; margin-bottom:1rem;">
+            Validate & Translate Address
+          </button>
+
+          <div style="display:flex; flex-direction:column; gap:0.5rem; margin-top:0.5rem;">
+            <button id="seg-valid-test-btn" class="btn btn-outline btn-sm">
+              ✅ Quick Test: Valid Access (Offset &lt; Limit)
+            </button>
+            <button id="seg-fault-test-btn" class="btn btn-danger btn-sm">
+              🛑 Quick Test: Trigger Segmentation Fault (SIGSEGV)
+            </button>
+          </div>
+        </div>
+
+        <!-- Main Display: Segment Table & Physical RAM Map -->
+        <div style="display:flex; flex-direction:column; gap:1.2rem;">
+          
+          <!-- Segment Table -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">📋 Segment Table (Base & Limit Registers)</h3>
+                <div class="card-subtitle">User-view of memory divided into logical units</div>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="pr-table" style="text-align:left;">
+                <thead>
+                  <tr>
+                    <th>Segment No.</th>
+                    <th>Logical Function / Name</th>
+                    <th>Base Address (RAM)</th>
+                    <th>Limit (Length)</th>
+                    <th>Permissions</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="seg-table-tbody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Result Container -->
+          <div id="seg-result-box" style="display:none;">
+            <!-- Injected by JS -->
+          </div>
+
+          <!-- Physical Memory Segment Map -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">🖥️ Physical RAM Segment Allocation</h3>
+              <span class="form-help">Shows how variable-sized segments reside non-contiguously in physical memory</span>
+            </div>
+
+            <div id="seg-phys-map">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         TAB 6: THRASHING & WORKING SET
+         ======================================================== -->
+    <section id="tab-thrashing" class="tab-pane">
+      
+      <!-- Interactive Curve Card -->
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">📈 CPU Utilization vs Degree of Multiprogramming</h3>
+            <div class="card-subtitle">Explore the "Thrashing Cliff" when too many processes compete for physical RAM</div>
+          </div>
+          <div id="thrash-state-indicator">
+            <!-- State badge injected by JS -->
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.5rem;">
+          <div class="form-label-row" style="margin-bottom:0.5rem;">
+            <label class="form-label">Degree of Multiprogramming (Number of Concurrent Processes)</label>
+            <strong id="thrash-degree-val" style="color:var(--accent-cyan); font-size:1.2rem;">6</strong>
+          </div>
+          <input type="range" id="thrash-degree-slider" min="1" max="15" value="6" style="width:100%;">
+          <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted); margin-top:2px;">
+            <span>1 Process (Underutilized CPU)</span>
+            <span style="color:var(--accent-emerald)">Peak Optimal (~7-8 Processes)</span>
+            <span style="color:var(--accent-rose)">15 Processes (Extreme Thrashing)</span>
+          </div>
+        </div>
+
+        <!-- Canvas Graph -->
+        <div style="text-align:center;">
+          <canvas id="thrash-curve-canvas" width="850" height="300" style="width:100%; max-width:850px; border-radius:var(--radius-md); border:1px solid var(--border-color);"></canvas>
+        </div>
+      </div>
+
+      <!-- Working Set Model Simulator -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">🔄 Peter Denning's Working Set Model Simulator</h3>
+            <div class="card-subtitle">Working Set W(t, Δ) = Set of distinct pages referenced in the last Δ time units</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem; margin-bottom:1.2rem;">
+          <div>
+            <div class="form-label-row">
+              <label class="form-label">Working Set Window Size (Δ)</label>
+              <strong id="ws-delta-val" style="color:var(--accent-cyan)">4</strong>
+            </div>
+            <input type="range" id="ws-delta-slider" min="2" max="8" value="4" style="width:100%;">
+          </div>
+
+          <div>
+            <div class="form-label-row">
+              <label class="form-label">Current Timeline Step (t)</label>
+              <strong id="ws-step-val" style="color:var(--accent-purple)">10</strong>
+            </div>
+            <input type="range" id="ws-step-slider" min="0" max="36" value="10" style="width:100%;">
+          </div>
+        </div>
+
+        <div id="ws-display-container">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================
+         TAB 7: VIVA VOCE & INTERACTIVE QUIZ
+         ======================================================== -->
+    <section id="tab-quiz" class="tab-pane">
+      
+      <!-- Top Switcher -->
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem; margin-bottom:1.5rem;">
+        
+        <!-- Interactive Quiz Card -->
+        <div class="quiz-card">
+          <div class="flex-between" style="margin-bottom:1rem; border-bottom:1px solid var(--border-color); padding-bottom:0.75rem;">
+            <div>
+              <h3 style="font-size:1.2rem; font-weight:700; color:var(--text-main);">🎯 Interactive OS Exam Quiz</h3>
+              <div id="quiz-progress-text" style="font-size:0.8rem; color:var(--text-muted)">Question 1 of 10</div>
+            </div>
+            <span id="quiz-score-badge" class="badge badge-cyan">Score: 0/10</span>
+          </div>
+
+          <div id="quiz-question-container">
+            <!-- Question and options injected by JS -->
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1.2rem;">
+            <button id="quiz-restart-btn" class="btn btn-outline btn-sm">Restart</button>
+            <button id="quiz-submit-btn" class="btn btn-primary" disabled>Submit Answer</button>
+            <button id="quiz-next-btn" class="btn btn-success" style="display:none;">Next Question ➔</button>
+          </div>
+        </div>
+
+        <!-- Interactive Flashcards -->
+        <div class="card" style="display:flex; flex-direction:column; justify-content:space-between;">
+          <div class="flex-between" style="border-bottom:1px solid var(--border-color); padding-bottom:0.75rem;">
+            <h3 class="card-title">🃏 Concept Flashcards</h3>
+            <span id="flashcard-counter" class="badge badge-purple">1 / 6</span>
+          </div>
+
+          <div id="flashcard-element" class="flashcard-container" title="Click card to flip!">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">
+                <span class="flashcard-topic">Topic Name</span>
+                <h4 class="flashcard-title">Concept Title</h4>
+                <div class="flashcard-hint">🔄 Click to Flip and Reveal Explanation</div>
+              </div>
+              <div class="flashcard-back">
+                <span class="flashcard-topic">Key Formula / Takeaway</span>
+                <div class="flashcard-desc" style="font-size:0.95rem; line-height:1.6;">Explanation content</div>
+                <div class="flashcard-hint" style="color:var(--accent-cyan)">🔄 Click to Flip Back</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex-between">
+            <button id="flashcard-prev-btn" class="btn btn-secondary btn-sm">◀ Previous</button>
+            <span class="form-help">Click card to flip</span>
+            <button id="flashcard-next-btn" class="btn btn-secondary btn-sm">Next ▶</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Viva Voce Bank -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">🎓 OS Viva Voce Question Bank (25+ Questions)</h3>
+            <div class="card-subtitle">Frequently asked questions with high-scoring model answers</div>
+          </div>
+          <div style="max-width:320px;">
+            <input type="text" id="viva-search-input" class="form-input" placeholder="🔍 Search viva questions...">
+          </div>
+        </div>
+
+        <div id="viva-accordion-container" class="viva-accordion">
+          <!-- Accordion items injected by JS -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================
+         TAB 8: LAB REPORT GENERATOR
+         ======================================================== -->
+    <section id="tab-report" class="tab-pane">
+      
+      <div class="card" style="margin-bottom:1.5rem;">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">📄 Generate Printable Academic Lab Report</h3>
+            <div class="card-subtitle">Compiles simulation parameters, metrics, and logs into a formal PDF/Print-ready format</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
+          <div class="form-group">
+            <label class="form-label" for="report-student-name">Student Full Name</label>
+            <input type="text" id="report-student-name" class="form-input" value="Vikas Pal">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="report-roll-no">Roll / Student ID</label>
+            <input type="text" id="report-roll-no" class="form-input" value="CS-2026-8841">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="report-course">Course Name / Code</label>
+            <input type="text" id="report-course" class="form-input" value="CS301 - Operating Systems Lab">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="report-instructor">Faculty / Evaluator</label>
+            <input type="text" id="report-instructor" class="form-input" value="Prof. Operating Systems">
+          </div>
+        </div>
+
+        <div style="display:flex; gap:0.75rem;">
+          <button id="report-generate-btn" class="btn btn-primary">
+            📝 Generate Lab Report
+          </button>
+          <button id="report-print-btn" class="btn btn-success" style="display:none;">
+            🖨️ Print / Save to PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Generated Report Sheet Output -->
+      <div id="report-output-sheet" style="display:none;">
+        <!-- Injected by JS -->
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/contiguous.js"></script>
+  <script src="js/pageReplacement.js"></script>
+  <script src="js/pagingTlb.js"></script>
+  <script src="js/segmentation.js"></script>
+  <script src="js/thrashing.js"></script>
+  <script src="js/quizViva.js"></script>
+  <script src="js/reportGenerator.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
